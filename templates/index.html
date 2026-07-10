@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styleport.css') }}">
+    <script src="{{url_for('static', filename='main.js') }}"></script>
+</head>
+<body>
+    <nav>
+    <!-- app.py-dakı def index() funksiyasına yönləndirir -->
+    <a href="{{ url_for('index') }}">Home</a> | 
+    
+    <!-- app.py-dakı def about() funksiyasına yönləndirir -->
+    <a href="{{ url_for('about') }}">About Me</a> | 
+    
+    <!-- app.py-dakı def projects() funksiyasına yönləndirir -->
+    <a href="{{ url_for('projects') }}">Projects</a>
+    </nav>
+    
+    <header class="heading">
+        <h1 id="name">{{ profile['name'] }}</h1>
+        <p>{{ profile['profession'] }}</p>
+        <button onclick="changeColor()">Change color</button>
+    </header>
+    <hr>
+    
+    <section>
+        <h2 id="hide">About:</h2>
+        <button onclick="hideMessage()">Hide</button>
+        <button onclick="showMessage()">Show</button>
+        <div class="about">
+            {{profile['about']}}
+        </div>
+    </section>
+    <h2 id="skill">Bacarıqlarım</h2>
+    
+    <div class="skills">
+    
+
+    <ul class="skills-list" id="skills-list">
+        <li>Pianino çalmağı bacarıram</li>
+        <li>Python, Java, C# proqramlaşdırma dillərini bilirəm</li>
+        <li>Komanda ilə işləməyi bacarıram</li>
+        <li>Şəkil çəkməyi bacarıram</li>
+        <li>Rahatlıqla yeni dil öyrənə bilirəm</li>
+    </ul>
+    </div>
+    <button onclick="addSkill()">Bacarıq əlavə et</button>
+    </div>
+    
+    <br>
+    <h2>Təhsilim</h2>
+    <table border="2">
+        <th>Təhsil müəssisəsi</th>
+        <th>İllər</th>
+        <tr>
+            <td>Heydər Əliyev adına lisey</td>
+            <td>2014-2025</td>
+        </tr>
+        <tr>
+            <td>Azərbaycan Dövlət İqtisad Universiteti</td>
+            <td>2025-2029</td>
+        </tr>
+    </table>
+    <br>
+    <h2>Projects</h2>
+    <div class="projects" id="newProject">
+        <!-- <ol>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="C:\Users\User\OneDrive\Рабочий стол\bakufuture\BakuFuture.pptx">Baku Future</a></li>
+            <li><a href="#">Leadership Volunteer Summit</a></li>
+            <li><a href="C:\Users\User\OneDrive\Рабочий стол\ArzumMain\IntroSoftwareProg.pdf">Coursera: Final Project</a></li>
+            <button onclick="addProject('My Project')">New Project</button>
+        </ol> -->
+        {% for project in projects %}
+        <div class="project-card">
+            <h3>{{project['title']}}</h3>
+            <p>{{project['description']}}</p>
+
+            
+        </div>
+        {% endfor %}    
+    </div>
+
+
+    <h2 id="contact">Əlaqə</h2>
+    
+    <form id="contact-form">
+        
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="contact-name" name="name">
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <div id="error-message" style="color: orange"; margin-bottom:10px;></div>
+        
+        <button type="submit" id = "checkForm">Send</button>
+        
+        <!-- <input type="text" placeholder="Adınızı daxil edin">
+        <br>
+        <input type="email" placeholder="E-poçtunuzu daxil edin">
+        <br>
+        <textarea placeholder="Mesajınızı daxil edin"></textarea>
+        <br>
+        <button type="submit">Göndər</button> -->  
+    </form>
+    
+    <button id="backToTop" title="Go to top">Up</button>
+</body>
+</html>
